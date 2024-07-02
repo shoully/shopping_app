@@ -10,6 +10,11 @@ This is a simple shopping app demo built with Flutter as part of my participatio
 ## Requirements
 - Flutter SDK
 
+## Screenshots
+![Products Screen](assets/screenshots/products_screen.jpg)
+![Checkout Screen](assets/screenshots/checkout_screen.jpg)
+![Order Success Screen](assets/screenshots/order_success_screen.jpg)
+
 ## Setup Instructions
 1. Clone the repository:
    ```bash

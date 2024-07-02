@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Simple Shopping App'),
+          title: const Text('Shopping App'),
         ),
         body: IndexedStack(
           index: _selectedIndex,

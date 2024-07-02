@@ -11,9 +11,10 @@ This is a simple shopping app demo built with Flutter as part of my participatio
 - Flutter SDK
 
 ## Screenshots
-![Products Screen](assets/screenshots/products_screen.jpg | width=100)
-![Checkout Screen](assets/screenshots/checkout_screen.jpg | width=100)
-![Order Success Screen](assets/screenshots/order_success_screen.jpg | width=100)
+
+<img src="assets/screenshots/products_screen.jpg" width="100" alt="Products Screen">
+<img src="assets/screenshots/checkout_screen.jpg" width="150" alt="Checkout Screen">
+<img src="assets/screenshots/order_success_screen.jpg" width="200" alt="Order Success Screen">
 
 ## Setup Instructions
 1. Clone the repository:

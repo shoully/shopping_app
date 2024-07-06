@@ -1,34 +1,78 @@
 import 'package:flutter/material.dart';
-import 'product.dart';
+import 'package:provider/provider.dart';
+import 'product_provider.dart';
 
 class ProductsScreen extends StatelessWidget {
-  final List<Product> products = [
-    const Product("Shirt", 19.99),
-    const Product("Shoes", 49.99),
-    const Product("Hat", 14.99),
-  ];
-
-  final Function(Product) onAddToCart;
-
-  ProductsScreen({required this.onAddToCart});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Products"),
+        title: Text('Gems Store'),
       ),
-      body: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final product = products[index];
-          return ListTile(
-            title: Text(product.name),
-            subtitle: Text("\$${product.price.toStringAsFixed(2)}"),
-            trailing: IconButton(
-              icon: const Icon(Icons.add_shopping_cart),
-              onPressed: () => onAddToCart(product),
-            ),
+      body: Consumer<ProductProvider>(
+        builder: (context, provider, child) {
+          // Check if data is loading
+          if (provider.loading) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          // Check for errors
+          if (provider.error.isNotEmpty) {
+            return Center(child: Text(provider.error));
+          }
+
+          // Display list of products
+          return ListView.builder(
+            itemCount: provider.products.length,
+            itemBuilder: (context, index) {
+              final product = provider.products[index];
+              return Card(
+                margin: EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Display product image or placeholder
+                      product.imageUrl.isNotEmpty
+                          ? Image.network(
+                        product.imageUrl,
+                        height: 150.0, // Fixed height for image
+                        width: double.infinity, // Full width
+                        fit: BoxFit.cover, // Cover the space
+                      )
+                          : Container(
+                        height: 150.0,
+                        width: double.infinity,
+                        color: Colors.grey[300], // Placeholder color
+                      ),
+                      SizedBox(height: 8.0), // Spacer
+                      // Display product name
+                      Text(
+                        product.name,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 4.0), // Spacer
+                      // Display product description
+                      Text(product.description),
+                      SizedBox(height: 4.0), // Spacer
+                      // Display product price
+                      Text(
+                        '\$${product.price.toStringAsFixed(2)}', // Format price to 2 decimal places
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green, // Price text color
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           );
         },
       ),
